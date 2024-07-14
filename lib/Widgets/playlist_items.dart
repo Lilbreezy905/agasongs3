@@ -4,7 +4,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:uhuru_music_stable/Widgets/next_playlist_items.dart';
-import 'package:uhuru_music_stable/Widgets/youtube_player.dart';
+import 'package:uhuru_music_stable/Widgets/reusable/youtube_player.dart';
 import 'package:uhuru_music_stable/controller/playlist_items_controller.dart';
 import 'package:uhuru_music_stable/env/variables.dart';
 import 'package:uhuru_music_stable/models/play_list_items.dart';
@@ -75,8 +75,9 @@ class _PlayListItemsWidgetState extends State<PlayListItemsWidget> {
                       onTap: () {
                         Navigator.of(context).push(MaterialPageRoute(
                           builder: (context) => YoutubePlayerWidget(
-                              videoId: snapshot
-                                  .data!.items[index].contentDetails.videoId),
+                            videoId: snapshot
+                                .data!.items[index].contentDetails.videoId,
+                          ),
                         ));
                       },
                       child: musicInfoWidget(
