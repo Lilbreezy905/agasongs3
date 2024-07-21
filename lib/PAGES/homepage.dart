@@ -16,6 +16,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   late final TabController _tabController;
+  final controller = Get.put(ConnectivityCheck());
   @override
   void initState() {
     super.initState();
@@ -84,87 +85,73 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
           ])),
       child: Scaffold(
         backgroundColor: Colors.transparent,
-        body: GetBuilder<ConnectivityCheck>(
-          init: ConnectivityCheck(),
-          builder: (controller) {
-            return SafeArea(
-              child: Padding(
-                padding: EdgeInsets.only(left: 20, top: 20),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.only(bottom: 5),
-                      child: Text(
-                        'Uhuru music',
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 18,
-                            letterSpacing: 1,
-                            fontWeight: FontWeight.bold),
+
+        ///working on connectivity checker
+
+        body: SafeArea(
+          child: Padding(
+            padding: EdgeInsets.only(left: 20, top: 20),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: EdgeInsets.only(bottom: 5),
+                  child: Text(
+                    'Uhuru music',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 18,
+                        letterSpacing: 1,
+                        fontWeight: FontWeight.bold),
+                  ),
+                ),
+                TabBar(
+                  controller: _tabController,
+                  isScrollable: true,
+                  labelStyle: TextStyle(
+                    fontSize: 20,
+                    color: AppTheme.white,
+                  ),
+                  indicator: BoxDecoration(
+                    border: Border(
+                      bottom: BorderSide(
+                        width: 3,
+                        color: Colors.pink,
                       ),
                     ),
-                    TabBar(
-                      controller: _tabController,
-                      isScrollable: true,
-                      labelStyle: TextStyle(
-                        fontSize: 20,
-                        color: AppTheme.white,
-                      ),
-                      indicator: BoxDecoration(
-                        border: Border(
-                          bottom: BorderSide(
-                            width: 3,
-                            color: Colors.pink,
-                          ),
-                        ),
-                      ),
-                      tabs: const [
-                        Tab(
-                          text: 'music',
-                        ),
-                        Tab(
-                          text: 'new',
-                        ),
-                        Tab(
-                          text: 'treding',
-                        )
-                      ],
+                  ),
+                  tabs: const [
+                    Tab(
+                      text: 'music',
                     ),
-                    Flexible(
-                      flex: 1,
-                      child: TabBarView(
-                        controller: _tabController,
-                        children: [
-                          controller.hasConnection
-                              ? FirstMusicDetail(
-                                  query: 'music usa ',
-                                )
-                              : Center(
-                                  child: Text('No internet connection'),
-                                ),
-                          controller.hasConnection
-                              ? SecondMusicListDetail(
-                                  query: 'new music 2024 ',
-                                )
-                              : Center(
-                                  child: Text('No internet connection'),
-                                ),
-                          controller.hasConnection
-                              ? ThirdMusicDetail(
-                                  query: 'treding music ',
-                                )
-                              : Center(
-                                  child: Text('No internet connection'),
-                                ),
-                        ],
-                      ),
+                    Tab(
+                      text: 'new',
+                    ),
+                    Tab(
+                      text: 'treding',
                     )
                   ],
                 ),
-              ),
-            );
-          },
+                Flexible(
+                  flex: 1,
+                  child: TabBarView(
+                    controller: _tabController,
+                    children: const [
+                      FirstMusicDetail(
+                        query: 'music usa ',
+                      ),
+                      SecondMusicListDetail(
+                        query: 'new music 2024 ',
+                      ),
+                      ThirdMusicDetail(
+                        query: 'treding music ',
+                      )
+                    ],
+                  ),
+                )
+              ],
+            ),
+          ),
         ),
       ),
     );

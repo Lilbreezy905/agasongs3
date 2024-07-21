@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors, avoid_print, sized_box_for_whitespace
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:uhuru_music_stable/Widgets/playlist_items.dart';

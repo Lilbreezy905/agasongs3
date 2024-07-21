@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, duplicate_ignore
+// ignore_for_file: prefer_const_constructors, duplicate_ignore, sized_box_for_whitespace
 
 import 'package:flutter/material.dart';
 
